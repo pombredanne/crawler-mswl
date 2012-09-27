@@ -19,7 +19,7 @@ _opener.addheaders = [('User-agent', user_agent)]
 parser = argparse.ArgumentParser(description="Let's crawl a web")
 
 parser.add_argument('url', nargs=1, help='target URL')
-parser.add_argument('-n', '--number-of-levels', type = int, default =1, help= 'how depth the crawl will go.')
+parser.add_argument('-n', '--number-of-levels', type=int, default=1, help='how depth the crawl will go.')
 
 args = parser.parse_args()
 

@@ -1,4 +1,11 @@
-# setuptools setup file
+'''
+Created on 27/09/2012
+
+Setuptools setup file
+
+@author: ricardo
+'''
+ 
 from setuptools import setup, find_packages
 
 setup (name="ricardo-crawler",
