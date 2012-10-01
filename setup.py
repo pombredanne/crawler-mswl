@@ -8,12 +8,12 @@ Setuptools setup file
  
 from setuptools import setup, find_packages
 
-setup (name="ricardo-crawler",
+setup (name="ricardo_crawler",
         version="0.1",
         packages=find_packages(),
-        scripts=['ricardo-crawler'],
+        scripts=['ricardo_crawler'],
         install_requires=['BeautifulSoup'],
-        package_data={'pyricardo-crawler':[''], },
+        package_data={'pyricardo_crawler':[''], },
         author='Ricardo García Fernández',
         author_email='ricardogarfe@gmail.com',
         description='My first Web Scrapper in Python',
