@@ -1,0 +1,9 @@
+=================================
+crawler-mswl: Python web crawler
+=================================
+
+TODO List
+==========
+
+    * Create objects to represent crawled data
+    * Create a chart with the data
