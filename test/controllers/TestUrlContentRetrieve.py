@@ -78,6 +78,22 @@ class TestUrlContentRetrieve(unittest.TestCase):
             self.assertEqual(expected_exception, str(url_error), "Exception "\
                              "URLError is not correct with message:\n"\
                              + str(url_error))
+        
+        # Test 2 - enconding
+        starting_url = "http://es.wikipedia.org"
+        url_content_retrieve = UrlContentRetrieve(starting_url)
+        target_url = \
+            "http://es.wikipedia.org/wiki/Depresi%C3%B3n_tropical_Diez_(2007)"
+        expected_enconding = "utf-8"
+        
+        returned_soup_code = url_content_retrieve.url_content(target_url)
+        
+        returned_enconding = returned_soup_code.originalEncoding
+
+        self.assertEqual(expected_enconding, returned_enconding, \
+                         "Encondin doesn't match:\n\t* Expected: "\
+                         + expected_enconding + "\n\t* Returned: "\
+                         + returned_enconding)
             
 
 if __name__ == "__main__":

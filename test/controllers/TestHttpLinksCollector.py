@@ -5,12 +5,12 @@ Created on 01/10/2012
 '''
 import unittest
 
-
-class TestHttpLinksCollector.py(unittest.TestCase):
+class TestHttpLinksCollector (unittest.TestCase):
+    '''Test class for methods defined in HttpLinksCollector class.
+    '''
 
     def setUp(self):
         pass
-
 
     def tearDown(self):
         pass
