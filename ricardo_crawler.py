@@ -25,9 +25,9 @@ level = 1;
 links = {}
 httpLinksCollector = HttpLinksCollector(target_url)
 
-linksList = httpLinksCollector.retrieveLinks(target_url, depth, level)
+links_list = httpLinksCollector.retrieve_links(target_url, depth, level)
 
-links[target_url] = linksList
+links[target_url] = links_list
 
 print links
 

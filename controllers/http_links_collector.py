@@ -8,18 +8,20 @@ Created on 27/09/2012
 from url_content_retrieve import UrlContentRetrieve
 
 class HttpLinksCollector:
+    '''Class to manage links from url.
+    '''
 
-    def __init__(self, startingURL):
+    def __init__(self, starting_url):
         '''Initialize to set urlContentRetrieve object with startingURL.
         
         Keyword arguments:
-        startingURL -- URL to start crawling.
+        starting_url -- URL to start crawling.
 
         '''
         
-        self.urlContentRetrieve = UrlContentRetrieve(startingURL)
+        self.url_content_retrieve = UrlContentRetrieve(starting_url)
     
-    def retrieveLinks(self, target_url, depth=1, level=1):
+    def retrieve_links(self, target_url, depth=1, level=1):
         '''
         Retrieve links from url content until defined depth organized in levels.
         
@@ -32,15 +34,16 @@ class HttpLinksCollector:
 
         links = {}
 
-        soup_code = self.urlContentRetrieve.urlContent(target_url)
+        soup_code = self.url_content_retrieve.url_content(target_url)
 
         if depth >= level:
             for link in soup_code.findAll('a') :
                 if link.has_key('href'):
-                    hrefLink = link['href']
+                    href_link = link['href']
                     try:
-                        sublinks = (self.retrieveLinks(hrefLink, depth, level + 1))
-                        links[hrefLink] = sublinks
+                        sublinks = \
+                            self.retrieve_links(href_link, depth, level + 1)
+                        links[href_link] = sublinks
                     except ValueError:
                         # La Url no es correcta 
                         print "URL is not correct:\t" + link['href']

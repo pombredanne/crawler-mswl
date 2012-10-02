@@ -4,11 +4,12 @@ Created on 01/10/2012
 @author: ricardo
 '''
 import unittest
-from url_content_retrieve import UrlContentRetrieve
-
+from controllers.url_content_retrieve import UrlContentRetrieve
+from urllib2 import URLError
 
 class TestUrlContentRetrieve(unittest.TestCase):
-
+    '''Test class for methods defined in UrlContentRetrieve class.
+    '''
 
     def setUp(self):
         pass
@@ -18,37 +19,66 @@ class TestUrlContentRetrieve(unittest.TestCase):
         pass
 
 
-    def testGenerateCorrectURL(self):
+    def test_generate_correct_url(self):
         ''' Test method for retrieve the correct URL
-        
         '''
         
-        startingURL = "http://localhost"
-        urlContentRetrieve = UrlContentRetrieve(startingURL)
+        starting_url = "http://localhost"
+        url_content_retrieve = UrlContentRetrieve(starting_url)
 
         # Test 1
-        urlToCheck = "http://localhost"
-        expectedURL = "http://localhost"
-        returnedURL = urlContentRetrieve.generateCorrectURL(urlToCheck)
+        url_to_check = "http://localhost"
+        expected_url = "http://localhost"
+        returned_url = url_content_retrieve.generate_correct_url(url_to_check)
         
-        self.assertEqual(returnedURL, expectedURL, "Error converting URL\n:\t* from: " + urlToCheck + "\n\t* to: " + expectedURL + "\nReturned value: " + returnedURL)
+        self.assertEqual(returned_url, expected_url, \
+                         "Error converting URL\n:\t* from: "\
+                          + url_to_check + "\n\t* to: " + expected_url + \
+                          "\nReturned value: " + returned_url)
 
         # Test 2    
-        urlToCheck = "/media"
-        expectedURL = "http://localhost/media"
-        returnedURL = urlContentRetrieve.generateCorrectURL(urlToCheck)
+        url_to_check = "/media"
+        expected_url = "http://localhost/media"
+        returned_url = url_content_retrieve.generate_correct_url(url_to_check)
         
-        self.assertEqual(returnedURL, expectedURL, "Error converting URL\n:\t* from: " + urlToCheck + "\n\t* to: " + expectedURL + "\nReturned value: " + returnedURL)
+        self.assertEqual(returned_url, expected_url, \
+                         "Error converting URL\n:\t* from: "\
+                          + url_to_check + "\n\t* to: " + expected_url + \
+                          "\nReturned value: " + returned_url)
 
         # Test 3
-        urlToCheck = "//mediateca.org"
-        expectedURL = "http://mediateca.org"
-        returnedURL = urlContentRetrieve.generateCorrectURL(urlToCheck)
+        url_to_check = "//mediateca.org"
+        expected_url = "http://mediateca.org"
+        returned_url = url_content_retrieve.generate_correct_url(url_to_check)
         
-        self.assertEqual(returnedURL, expectedURL, "Error converting URL\n:\t* from: " + urlToCheck + "\n\t* to: " + expectedURL + "\nReturned value: " + returnedURL)
+        self.assertEqual(returned_url, expected_url, \
+                         "Error converting URL\n:\t* from: "\
+                          + url_to_check + "\n\t* to: " + expected_url + \
+                          "\nReturned value: " + returned_url)
         
-        pass
+    def test_url_content(self):
+        '''Test method for retrieve content from url.
+        '''
+        
+        # Initialize object
+        starting_url = "http://non-existing-url.com"
+        url_content_retrieve = UrlContentRetrieve(starting_url)
 
+        # Test 1 - Variables
+        # Return error
+        target_url = "http://non-existing-url.com"
+        expected_exception = \
+            "<urlopen error [Errno -2] Name or service not known>"
+        try:
+            returned_soup_code = url_content_retrieve.url_content(target_url)
+            self.assertIsNone(returned_soup_code, \
+                              "Url content has return a value:\n"\
+                              + str(returned_soup_code))
+        except URLError, url_error:
+            self.assertEqual(expected_exception, str(url_error), "Exception "\
+                             "URLError is not correct with message:\n"\
+                             + str(url_error))
+            
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
