@@ -4,16 +4,17 @@ Created on 27/09/2012
 
 @author: ricardo
 '''
+
 import urllib2
-from urllib2 import _opener, HTTPError
 from BeautifulSoup import BeautifulSoup as Soup
-from httplib import InvalidURL
-from setuptools.package_index import user_agent
 
 class UrlContentRetrieve:
 
     def __init__(self, topUrl):
         '''Initializes UrlContentRetrieve with default user_agent.
+        
+        Keyword arguments:
+        topUrl -- URL from top web level.
         
         '''
 

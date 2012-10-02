@@ -6,7 +6,6 @@ Created on 27/09/2012
 @author: ricardo
 '''
 
-from BeautifulSoup import BeautifulSoup as Soup
 import argparse
 from controllers.http_links_collector import HttpLinksCollector
         

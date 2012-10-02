@@ -15,7 +15,6 @@ class TestHttpLinksCollector.py(unittest.TestCase):
     def tearDown(self):
         pass
 
-
     def test_retrieveLinks(self):
         pass
 
