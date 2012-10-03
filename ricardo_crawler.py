@@ -1,9 +1,21 @@
 #!/usr/bin/env python
 # encoding=utf-8
 '''
-Created on 27/09/2012
+    This file is part of crawler-mswl.
 
-@author: ricardo
+    crawler-mswl is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    crawler-mswl is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with crawler-mswl.  If not, see <http://www.gnu.org/licenses/>.
+
 '''
 
 import argparse
@@ -11,6 +23,11 @@ from controllers.http_links_collector import HttpLinksCollector
 
 class RicardoCrawler:
     '''RicardoCrawler class to crawl a web using system parameters.
+
+    Created on 27/09/2012
+
+    @author: Ricardo García Fernández
+    @mail: ricardogarfe@gmail.com
     
     '''
     
@@ -18,7 +35,7 @@ class RicardoCrawler:
         '''Init method
         '''
         
-        pass
+        self.crawler_start()
 
     def crawler_start(self):
         '''Method to start crawling.
@@ -52,7 +69,9 @@ class RicardoCrawler:
         
         print links
 
+
+def main():
+    RicardoCrawler()
+
 if __name__ == '__main__':
-    RC = RicardoCrawler()
-    RC.crawler_start()
-        
+    main()     
