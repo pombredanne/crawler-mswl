@@ -20,7 +20,7 @@
 import urllib2
 import logging
 from BeautifulSoup import BeautifulSoup as Soup
-from urllib2 import HTTPError
+from urllib2 import HTTPError, URLError
 
 class UrlContentRetrieve:
     '''Controller class to manage url and retrieve content using BeautifulSoup.
@@ -73,6 +73,11 @@ class UrlContentRetrieve:
             self.logger.error("HttpError with url:\t" + target_url + \
                               "\nException message:\t " + \
                               str(http_error))
+            return None
+        except URLError, url_error:
+            self.logger.error("URLError with url:\t" + target_url + \
+                              "\nException message:\t " + \
+                              str(url_error))
             return None
 
         return soup_code

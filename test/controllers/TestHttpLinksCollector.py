@@ -50,6 +50,16 @@ class TestHttpLinksCollector (unittest.TestCase):
         
         self.assertTrue(not links_retrieved, \
                        "Retreved Links from:'" + target_url + "'")
+        
+        # Test 2 - check URLError - protocol irc.
+        starting_url = "http://www.nature.com"
+        target_url = "irc://irc.freenode.net/wikimedia-ayuda"
+
+        http_links_collector = HttpLinksCollector(starting_url)        
+        links_retrieved = http_links_collector.retrieve_links(target_url)
+        
+        self.assertTrue(not links_retrieved, \
+                       "Retreved Links from:'" + target_url + "'")
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testRetrieveLinks']
