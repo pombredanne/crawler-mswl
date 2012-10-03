@@ -1,15 +1,35 @@
 # coding=UTF-8
 '''
-Created on 27/09/2012
+    This file is part of crawler-mswl.
 
-@author: ricardo
+    crawler-mswl is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    crawler-mswl is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with crawler-mswl.  If not, see <http://www.gnu.org/licenses/>.
+
 '''
 
 import urllib2
+import logging
 from BeautifulSoup import BeautifulSoup as Soup
+from urllib2 import HTTPError
 
 class UrlContentRetrieve:
     '''Controller class to manage url and retrieve content using BeautifulSoup.
+
+    Created on 27/09/2012
+
+    @author: Ricardo García Fernández
+    @mail: ricardogarfe@gmail.com
+
     '''
 
     def __init__(self, top_url):
@@ -19,7 +39,11 @@ class UrlContentRetrieve:
         top_url -- URL from top web level.
         
         '''
+        
+        # Setup Log
+        self.setup_log()
 
+        # Define user agent
         user_agent = "Mozilla/5.0 (X11; U; Linux x86_64; en-Us) \
             AppleWebKit/534.7 (KHTML, Like Gecko) Chrome \
             /7.0.517.41 Safari/534.7"
@@ -42,8 +66,14 @@ class UrlContentRetrieve:
         # Get correct format of URL
         target_url = self.generate_correct_url(target_url)
 
-        raw_code = self.opener.open(target_url)
-        soup_code = Soup(raw_code)
+        try:
+            raw_code = self.opener.open(target_url)
+            soup_code = Soup(raw_code)
+        except HTTPError, http_error:
+            self.logger.error("HttpError with url:\t" + target_url + \
+                              "\nException message:\t " + \
+                              str(http_error))
+            return None
 
         return soup_code
 
@@ -58,12 +88,48 @@ class UrlContentRetrieve:
 
         '''
         
-        if url_to_check.startswith("//"):
-            url_to_check = "http:" + url_to_check
-        elif url_to_check.startswith("/"):
-            url_to_check = self.top_url + url_to_check
-        elif url_to_check.startswith("https://") or \
-            url_to_check.startswith("http://"):
-            url_to_check = url_to_check
+        if str(url_to_check).startswith("//"):
+            url_to_check = "http:" + str(url_to_check)
+        elif str(url_to_check).startswith("/"):
+            url_to_check = self.top_url + str(url_to_check)
+        elif str(url_to_check).startswith("#"):
+            url_to_check = None
+        elif not str(url_to_check).find("https://") and \
+            not str(url_to_check).find("http://"):
+            url_to_check = self.top_url + str(url_to_check)
 
         return url_to_check
+
+    def retrieve_formatted_links(self, soup_code):
+        ''' Retrieve the links in correct format into a list.
+        
+        '''
+
+        formatted_links = []
+        raw_links = []
+
+        # Extract all links
+        for link in soup_code.findAll('a') :
+            if link.has_key('href'):
+                raw_links.append(link['href'])
+        
+        # Convert to correct format
+        for raw_link in raw_links:
+            formatted_link = self.generate_correct_url(raw_link)
+            if formatted_link:
+                formatted_links.append(formatted_link)
+            
+        return formatted_links
+
+    def setup_log(self):
+        '''Set up Python logging.
+        
+        '''
+
+        self.logger = logging.getLogger('UrlContentRetrieve')
+        self.hdlr = logging.FileHandler('/var/tmp/UrlContentRetrieve.log')
+        self.formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        self.hdlr.setFormatter(self.formatter)
+        self.logger.addHandler(self.hdlr)
+        self.logger.setLevel(logging.WARNING)
+
