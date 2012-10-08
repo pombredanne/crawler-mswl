@@ -21,6 +21,7 @@ import urllib2
 import logging
 from BeautifulSoup import BeautifulSoup as Soup
 from urllib2 import HTTPError, URLError
+import traceback
 
 class UrlContentRetrieve:
     '''Controller class to manage url and retrieve content using BeautifulSoup.
@@ -68,16 +69,20 @@ class UrlContentRetrieve:
 
         try:
             raw_code = self.opener.open(target_url)
-            soup_code = Soup(raw_code)
+            soup_code = Soup(raw_code, fromEncoding="utf-8")
         except HTTPError, http_error:
             self.logger.error("HttpError with url:\t" + target_url + \
                               "\nException message:\t " + \
-                              str(http_error))
+                                str(http_error)\
+                                + "\nStack trace:\t" + \
+                                traceback.format_exc())
             return None
         except URLError, url_error:
             self.logger.error("URLError with url:\t" + target_url + \
                               "\nException message:\t " + \
-                              str(url_error))
+                                str(url_error)\
+                                + "\nStack trace:\t" + \
+                                traceback.format_exc())
             return None
 
         return soup_code
@@ -92,16 +97,26 @@ class UrlContentRetrieve:
         url_to_check -- URL to check
 
         '''
-        
-        if str(url_to_check).startswith("//"):
-            url_to_check = "http:" + str(url_to_check)
-        elif str(url_to_check).startswith("/"):
-            url_to_check = self.top_url + str(url_to_check)
-        elif str(url_to_check).startswith("#"):
+
+        try:
+            url_to_check = str(url_to_check.encode('utf-8'))
+        except UnicodeEncodeError, unicode_error:
+            self.logger.warning("UnicodeEncodeError with url:\t" + \
+                              url_to_check + "\nException message:\t " + \
+                                str(unicode_error)\
+                                + "\nStack trace:\t" + \
+                                traceback.format_exc())
+            return None
+
+        if url_to_check.startswith("//"):
+            url_to_check = "http:" + url_to_check
+        elif url_to_check.startswith("/"):
+            url_to_check = self.top_url + url_to_check
+        elif url_to_check.startswith("#"):
             url_to_check = None
-        elif not str(url_to_check).find("https://") and \
-            not str(url_to_check).find("http://"):
-            url_to_check = self.top_url + str(url_to_check)
+        elif not url_to_check.find("https://") and \
+            not url_to_check.find("http://"):
+            url_to_check = self.top_url + url_to_check
 
         return url_to_check
 
@@ -126,15 +141,35 @@ class UrlContentRetrieve:
             
         return formatted_links
 
+    def to_unicode(self, str, verbose=False):
+        '''attempt to fix non uft-8 string into utf-8, using a limited set of encodings'''
+
+        # fuller list of encodings at http://docs.python.org/library/codecs.html#standard-encodings
+        if not str:  return u''
+        u = None
+        # we could add more encodings here, as warranted.  
+        encodings = ('ascii', 'utf8', 'latin1')
+        for enc in encodings:
+            if u:  break
+            try:
+                u = unicode(str, enc)
+            except UnicodeDecodeError:
+                if verbose: print "error for %s into encoding %s" % (str, enc)
+                pass
+        if not u:
+            u = unicode(str, errors='replace')
+            if verbose:  print "using replacement character for %s" % str
+        return u
+
     def setup_log(self):
-        '''Set up Python logging.
+        '''Setup Python logging.
         
         '''
 
         self.logger = logging.getLogger('UrlContentRetrieve')
-        self.hdlr = logging.FileHandler('/var/tmp/UrlContentRetrieve.log')
-        self.formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        self.hdlr = logging.FileHandler('/var/tmp/crawler.log')
+        self.formatter = logging.Formatter('%(asctime)s %(levelname)s \
+            %(filename)s %(message)s')
         self.hdlr.setFormatter(self.formatter)
         self.logger.addHandler(self.hdlr)
         self.logger.setLevel(logging.WARNING)
-

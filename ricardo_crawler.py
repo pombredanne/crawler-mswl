@@ -20,6 +20,8 @@
 
 import argparse
 from controllers.http_links_collector import HttpLinksCollector
+import logging
+import json
 
 class RicardoCrawler:
     '''RicardoCrawler class to crawl a web using system parameters.
@@ -34,7 +36,7 @@ class RicardoCrawler:
     def __init__(self):
         '''Init method
         '''
-        
+        self.setup_log()
         self.crawler_start()
 
     def crawler_start(self):
@@ -67,10 +69,29 @@ class RicardoCrawler:
         
         links[target_url] = links_list
         
-        print links
+        links_result = json.dumps(links, sort_keys=True, indent=4)
+
+        # Print result in json view mode.
+        self.logger.info(links_result)
+
+    def setup_log(self):
+        '''Setup Python logging.
+        
+        '''
+
+        self.logger = logging.getLogger('ricardo-crawler')
+        self.hdlr = logging.FileHandler('/var/tmp/crawler.log')
+        self.formatter = logging.Formatter('%(asctime)s %(levelname)s \
+            %(filename)s %(message)s')
+        self.hdlr.setFormatter(self.formatter)
+        self.logger.addHandler(self.hdlr)
+        self.logger.setLevel(logging.INFO)
 
 
 def main():
+    '''Main method to initialize project.
+    '''
+
     RicardoCrawler()
 
 if __name__ == '__main__':

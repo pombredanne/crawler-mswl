@@ -61,6 +61,7 @@ class TestHttpLinksCollector (unittest.TestCase):
         self.assertTrue(not links_retrieved, \
                        "Retreved Links from:'" + target_url + "'")
 
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testRetrieveLinks']
     unittest.main()

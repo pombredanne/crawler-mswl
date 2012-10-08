@@ -19,6 +19,7 @@
 
 from url_content_retrieve import UrlContentRetrieve
 import logging
+import traceback
 
 class HttpLinksCollector:
     '''Class to manage links from url.
@@ -37,7 +38,7 @@ class HttpLinksCollector:
         starting_url -- URL to start crawling.
 
         '''
-        
+
         # Setup Log
         self.setup_log()
         # Define url content retrieve to use
@@ -54,6 +55,9 @@ class HttpLinksCollector:
         
         '''
 
+        # Define ScrapItem to generate json file
+        # scrap_item = ScrapItem()
+        
         links = {}
 
         if depth >= level:
@@ -76,7 +80,11 @@ class HttpLinksCollector:
                             # Invalid URL
                             self.logger.error("URL is not correct:\t" + link + \
                                               "\nException:\t"\
-                                               + str(value_error))
+                                               + str(value_error)\
+                                               +"\nStack trace:\t"+\
+                                               traceback.format_exc())
+                            
+        # TODO: Return a dictionary of ScrapItems 
         return links
     
     def print_depth(self, level):
@@ -94,14 +102,14 @@ class HttpLinksCollector:
         return deepLetter
 
     def setup_log(self):
-        '''Set up Python logging.
+        '''Setup Python logging.
         
         '''
 
         self.logger = logging.getLogger('HttpLinksCollector')
-        self.hdlr = logging.FileHandler('/var/tmp/HttpLinksCollector.log')
-        self.formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        self.hdlr = logging.FileHandler('/var/tmp/crawler.log')
+        self.formatter = logging.Formatter('%(asctime)s %(levelname)s \
+            %(filename)s %(message)s')
         self.hdlr.setFormatter(self.formatter)
         self.logger.addHandler(self.hdlr)
-        self.logger.setLevel(logging.INFO)
-
+        self.logger.setLevel(logging.WARNING)
