@@ -8,3 +8,9 @@
 
 ## generic files to ignore
 *~
+
+# SetupTools files
+build/
+dist/
+ricardo_crawler.egg-info/
+
