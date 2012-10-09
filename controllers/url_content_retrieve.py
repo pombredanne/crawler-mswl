@@ -22,6 +22,7 @@ import logging
 from BeautifulSoup import BeautifulSoup as Soup
 from urllib2 import HTTPError, URLError
 import traceback
+from httplib import BadStatusLine
 
 class UrlContentRetrieve:
     '''Controller class to manage url and retrieve content using BeautifulSoup.
@@ -84,7 +85,21 @@ class UrlContentRetrieve:
                                 + "\nStack trace:\t" + \
                                 traceback.format_exc())
             return None
-
+        except BadStatusLine, bad_status:
+            self.logger.error("BadStatusLine with url:\t" + target_url + \
+                              "\nException message:\t " + \
+                                str(bad_status)\
+                                + "\nStack trace:\t" + \
+                                traceback.format_exc())
+            return None
+        except Exception, exception:
+            self.logger.error("Exception with url:\t" + target_url + \
+                              "\nException message:\t " + \
+                                str(exception)\
+                                + "\nStack trace:\t" + \
+                                traceback.format_exc())
+            return None
+            
         return soup_code
 
     def generate_correct_url(self, url_to_check):
