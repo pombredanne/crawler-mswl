@@ -1,3 +1,18 @@
 =================================
 crawler-mswl: Python web crawler
 =================================
+
+Version 00.09.20
+=================
+
+Install version using ``easy_install ricardo-crawler``.
+Input argument control.
+Exception related to URL controlled and wrote in log file in ``/var/tmp/crawler.log``.
+Result output in log file.
+
+Version 1.00.00
+=================
+
+Documentation complete (TBC).
+Pylint Test passed.
+Test sources removed from install version.
