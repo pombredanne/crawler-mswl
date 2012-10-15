@@ -43,7 +43,8 @@ class TestHttpLinksCollector (unittest.TestCase):
         
         # Test 1 - check HttpError 401 in log
         starting_url = "http://www.nature.com"
-        target_url = "http://www.nature.com/nature/journal/v438/n7070/full/438900a.html"
+        target_url = \
+            "http://www.nature.com/nature/journal/v438/n7070/full/438900a.html"
 
         http_links_collector = HttpLinksCollector(starting_url)        
         links_retrieved = http_links_collector.retrieve_links(target_url)

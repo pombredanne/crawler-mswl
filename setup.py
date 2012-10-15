@@ -11,7 +11,7 @@ Setuptools setup file
 from setuptools import setup, find_packages
 
 setup (name="ricardo_crawler",
-        version="0.9.2",
+        version="01.00.00",
         packages=find_packages(),
         scripts=['ricardo_crawler.py'],
         install_requires=['BeautifulSoup'],
@@ -23,5 +23,5 @@ setup (name="ricardo_crawler",
         keywords='web-crawler',
         url='https://github.com/ricardogarfe/crawler-mswl',
         long_description='Web Scrapper in Python for Development Tools Subject from MSWL - URJC',
-        download_url='',
+        download_url='https://github.com/ricardogarfe/crawler-mswl/zipball/v01.00.00',
         )

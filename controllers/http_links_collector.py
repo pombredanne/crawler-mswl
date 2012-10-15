@@ -70,21 +70,20 @@ class HttpLinksCollector:
                         retrieve_formatted_links(soup_code)
                 for link in formatted_links :
     
-                        self.logger.info(self.print_depth(level) + " " + link)
-    
-                        try:
-                            sublinks = \
-                                self.retrieve_links(link, depth, level + 1)
-                            links[link] = sublinks
-                        except ValueError, value_error:
-                            # Invalid URL
-                            self.logger.error("URL is not correct:\t" + link + \
-                                              "\nException:\t"\
-                                               + str(value_error)\
-                                               +"\nStack trace:\t"+\
-                                               traceback.format_exc())
+                    self.logger.info(self.print_depth(level) + " " + link)
+
+                    try:
+                        sublinks = \
+                            self.retrieve_links(link, depth, level + 1)
+                        links[link] = sublinks
+                    except ValueError, value_error:
+                        # Invalid URL
+                        self.logger.error("URL is not correct:\t" + link + \
+                                          "\nException:\t"\
+                                           + str(value_error)\
+                                           + "\nStack trace:\t" + \
+                                           traceback.format_exc())
                             
-        # TODO: Return a dictionary of ScrapItems 
         return links
     
     def print_depth(self, level):
@@ -95,11 +94,11 @@ class HttpLinksCollector:
         level -- level to print *
         '''
 
-        deepLetter = ""
+        deep_letter = ""
         for i in range(level):
-            deepLetter = deepLetter + "*"
+            deep_letter = deep_letter + "*"
             
-        return deepLetter
+        return deep_letter
 
     def setup_log(self):
         '''Setup Python logging.

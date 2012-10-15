@@ -156,26 +156,6 @@ class UrlContentRetrieve:
             
         return formatted_links
 
-    def to_unicode(self, str, verbose=False):
-        '''attempt to fix non uft-8 string into utf-8, using a limited set of encodings'''
-
-        # fuller list of encodings at http://docs.python.org/library/codecs.html#standard-encodings
-        if not str:  return u''
-        u = None
-        # we could add more encodings here, as warranted.  
-        encodings = ('ascii', 'utf8', 'latin1')
-        for enc in encodings:
-            if u:  break
-            try:
-                u = unicode(str, enc)
-            except UnicodeDecodeError:
-                if verbose: print "error for %s into encoding %s" % (str, enc)
-                pass
-        if not u:
-            u = unicode(str, errors='replace')
-            if verbose:  print "using replacement character for %s" % str
-        return u
-
     def setup_log(self):
         '''Setup Python logging.
         
