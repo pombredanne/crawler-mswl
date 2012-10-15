@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 
 setup (name="ricardo_crawler",
         version="01.00.00",
-        packages=find_packages(),
+        packages=find_packages(exclude=["test", "test.*"]),
         scripts=['ricardo_crawler.py'],
         install_requires=['BeautifulSoup'],
         package_data={'pyricardo_crawler':[''], },
