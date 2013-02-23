@@ -38,7 +38,6 @@ To use this application without installing it you have to type:
 
 ```shell
 python ricardo-crawler.py -n 1 http://www.google.es
-
 ```
 
 Arguments
