@@ -80,13 +80,9 @@ There are tests developer for each controller behaviour:
 test/
 ├── controllers
 │   ├── __init__.py
-│   ├── __init__.pyc
 │   ├── TestHttpLinksCollector.py
-│   ├── TestHttpLinksCollector.pyc
-│   ├── TestUrlContentRetrieve.py
-│   └── TestUrlContentRetrieve.pyc
-├── __init__.py
-└── __init__.pyc
+│   └── TestUrlContentRetrieve.py
+└── __init__.py
 ```
 
 Issues management
