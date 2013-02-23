@@ -36,8 +36,7 @@ This application run by command `ricardo-crawler` after instalation.
 
 To use this application without installing it you have to type:
 
-```
-#!shell
+```shell
 python ricardo-crawler.py -n 1 http://www.google.es
 
 ```
@@ -46,23 +45,20 @@ Arguments
 ----------
 
 Two arguments to run the application:
-```
-#!shell
+```shell
 -n [Number of levels to inspect]: number of depth level to retrieve 
   links. If no argument is passed, by default is assigned to *1*.
 [URL]: URL to inspect for each level defined.
 ```
 
 Has a help command to define correctly these arguments.
-```
-#!shell
+```shell
 python ricardo_crawler.py --help
 ```
 
 Help Console Output:
 
-```
-#!shell
+```shell
 usage: ricardo_crawler.py [-h] [-n NUMBER_OF_LEVELS] url
 
 Let's crawl a web
@@ -81,7 +77,7 @@ Test
 
 There are tests developer for each controller behaviour:
 
-```
+```shell
 test/
 ├── controllers
 │   ├── __init__.py
