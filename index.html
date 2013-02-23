@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Crawler-mswl by ricardogarfe</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Crawler-mswl</h1>
+        <p>Python Web Crawler</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/ricardogarfe/crawler-mswl" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/ricardogarfe/crawler-mswl/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/ricardogarfe/crawler-mswl/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>crawler-mswl: Python web crawler</h1>
+
+<h1>Introduction</h1>
+
+<p>This is a Python crawler project to retrieve all links in <code>a</code> tags defined in URL and access every <code>href</code> property for each link as defined in input parameter.</p>
+
+<p>Ricardo García Fernández developed this project for <code>Developing Tools</code> Subject coursed in <a href="http://master.libresoft.es/">Master on Libre Software (Master Universitario en Software libre</a> at <a href="http://www.urjc.es/">Universidad Rey juan Carlos</a>.</p>
+
+<h1>Requirements</h1>
+
+<ul>
+<li>Java JDK 1.6.0_22</li>
+<li>Python 2.7.2</li>
+</ul><h1>License</h1>
+
+<p>This project has <code>GNU GENERAL PUBLIC LICENSE version 3</code> see complete definition in <a href="COPYING">COPYING</a> file.</p>
+
+<h1>Install</h1>
+
+<p>Read install instructions in <a href="INSTALL">INSTALL</a> file.</p>
+
+<ul>
+<li>Install from PYPI.</li>
+<li>Install from Source.</li>
+</ul><h1>Command</h1>
+
+<p>How to use the application.</p>
+
+<p>This application run by command <code>ricardo-crawler</code> after instalation.</p>
+
+<p>To use this application without installing it you have to type:</p>
+
+<div class="highlight"><pre>python ricardo-crawler.py -n 1 http://www.google.es
+</pre></div>
+
+<h2>Arguments</h2>
+
+<p>Two arguments to run the application:</p>
+
+<div class="highlight"><pre>-n <span class="o">[</span>Number of levels to inspect<span class="o">]</span>: number of depth level to retrieve 
+  links. If no argument is passed, by default is assigned to *1*.
+<span class="o">[</span>URL<span class="o">]</span>: URL to inspect <span class="k">for </span>each level defined.
+</pre></div>
+
+<p>Has a help command to define correctly these arguments.</p>
+
+<div class="highlight"><pre>python ricardo_crawler.py --help
+</pre></div>
+
+<p>Help Console Output:</p>
+
+<div class="highlight"><pre>usage: ricardo_crawler.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-n NUMBER_OF_LEVELS<span class="o">]</span> url
+
+Let<span class="err">'</span>s crawl a web
+
+positional arguments:
+  url                   target URL
+
+optional arguments:
+  -h, --help            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+  -n NUMBER_OF_LEVELS, --number-of-levels NUMBER_OF_LEVELS
+                        how depth the crawl will go.
+</pre></div>
+
+<h2>Test</h2>
+
+<p>There are tests developer for each controller behaviour:</p>
+
+<div class="highlight"><pre><span class="nb">test</span>/
+├── controllers
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── TestHttpLinksCollector.py
+│   ├── TestHttpLinksCollector.pyc
+│   ├── TestUrlContentRetrieve.py
+│   └── TestUrlContentRetrieve.pyc
+├── __init__.py
+└── __init__.pyc
+</pre></div>
+
+<h1>Issues management</h1>
+
+<p>Issue management its done with Redmine project tracker in:</p>
+
+<p><a href="http://code.sidelab.es/projects/ricardogarcia2012/issues">http://code.sidelab.es/projects/ricardogarcia2012/issues</a></p>
+
+<h1>License</h1>
+
+<p><a href="http://creativecommons.org/licenses/by/3.0/" rel="Creative Commons Attribution 3.0"><img src="http://i.creativecommons.org/l/by/3.0/88x31.png" alt="Foo"></a></p>
+
+<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/ricardogarfe">ricardogarfe</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
