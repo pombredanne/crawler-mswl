@@ -11,7 +11,7 @@ Setuptools setup file
 from setuptools import setup, find_packages
 
 setup (name="ricardo_crawler",
-        version="01.00.00",
+        version="01.00.01",
         packages=find_packages(exclude=["test", "test.*"]),
         scripts=['ricardo_crawler.py'],
         install_requires=['BeautifulSoup'],
