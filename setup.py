@@ -23,5 +23,5 @@ setup (name="ricardo_crawler",
         keywords='web-crawler',
         url='https://github.com/ricardogarfe/crawler-mswl',
         long_description='Web Scrapper in Python for Development Tools Subject from MSWL - URJC',
-        download_url='https://github.com/ricardogarfe/crawler-mswl/zipball/v01.00.00',
+        download_url='https://github.com/ricardogarfe/crawler-mswl/zipball/v01.00.01',
         )
