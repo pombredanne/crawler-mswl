@@ -1,6 +1,8 @@
 crawler-mswl: Python web crawler
 =================================
 
+[![Build Status](https://travis-ci.org/ricardogarfe/crawler-mswl.png?branch=master)](https://travis-ci.org/ricardogarfe/crawler-mswl)
+
 Introduction
 =============
 
